@@ -51,6 +51,8 @@
 		28CAD53B257B7AFF005F72DE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD53A257B7AFF005F72DE /* PostTableViewCell.swift */; };
 		28CAD542257BC554005F72DE /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD541257BC554005F72DE /* Storage.swift */; };
 		28E5B7D0256168A0000FE56E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E5B7CF256168A0000FE56E /* ProfileViewController.swift */; };
+		28FD48A6265ABE9F0007D0FA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD48A5265ABE9F0007D0FA /* FavoritesViewController.swift */; };
+		28FD48A7265ABE9F0007D0FA /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FD48A5265ABE9F0007D0FA /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,7 @@
 		28CAD53A257B7AFF005F72DE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		28CAD541257BC554005F72DE /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		28E5B7CF256168A0000FE56E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		28FD48A5265ABE9F0007D0FA /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,7 @@
 				28CAD537257B7AB1005F72DE /* ProfileTableHederView.swift */,
 				280B8D3B25D59F7500A798FD /* ProfileCoordinator.swift */,
 				28810A7125864FBB00F9E84E /* ProfilePhotoStackView.swift */,
+				28FD48A5265ABE9F0007D0FA /* FavoritesViewController.swift */,
 				28CAD53A257B7AFF005F72DE /* PostTableViewCell.swift */,
 			);
 			path = Profile;
@@ -269,6 +273,7 @@
 				28810A782586708800F9E84E /* PhotosViewController.swift in Sources */,
 				28810A7225864FBB00F9E84E /* ProfilePhotoStackView.swift in Sources */,
 				288D6C38257292FF0039E5EF /* TopHeaderView.swift in Sources */,
+				28FD48A6265ABE9F0007D0FA /* FavoritesViewController.swift in Sources */,
 				288D6C3B257299720039E5EF /* LogInViewController.swift in Sources */,
 				281F130F258A15940035822E /* PhotosCollectionViewCell.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
@@ -296,6 +301,7 @@
 				284AE2FB25B0C49E00027E09 /* PhotosViewController.swift in Sources */,
 				284AE2FC25B0C49E00027E09 /* ProfilePhotoStackView.swift in Sources */,
 				284AE2FD25B0C49E00027E09 /* TopHeaderView.swift in Sources */,
+				28FD48A7265ABE9F0007D0FA /* FavoritesViewController.swift in Sources */,
 				284AE2FF25B0C49E00027E09 /* LogInViewController.swift in Sources */,
 				284AE30025B0C49E00027E09 /* PhotosCollectionViewCell.swift in Sources */,
 				284AE30125B0C49E00027E09 /* PostViewController.swift in Sources */,

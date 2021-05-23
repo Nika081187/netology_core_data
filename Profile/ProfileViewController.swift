@@ -77,7 +77,6 @@ class ProfileViewController: UIViewController {
         table.dataSource = self
         table.delegate = self
         
-        self.navigationController?.navigationBar.isHidden = true
         table.backgroundColor = .white
         view.addSubview(table)
         table.addSubview(avatarButton)
@@ -94,9 +93,18 @@ class ProfileViewController: UIViewController {
             avatarButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
         
-        let tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapAvatar))
-        header.avatarImage.addGestureRecognizer(tapGestureRecognizer)
+        let tapAvatarGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapAvatar))
+        header.avatarImage.addGestureRecognizer(tapAvatarGestureRecognizer)
         header.avatarImage.isUserInteractionEnabled = true
+        
+        let tapTableGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapTable))
+        tapTableGestureRecognizer.numberOfTapsRequired = 2
+        table.addGestureRecognizer(tapTableGestureRecognizer)
+        table.isUserInteractionEnabled = true
+    }
+    
+    @objc func tapTable() {
+        print("Table tapped")
     }
     
     @objc func tapAvatar() {
