@@ -9,9 +9,7 @@
 import UIKit
 
 @available(iOS 13.0, *)
-class MyTabBarController: UIViewController, UITabBarDelegate {
-
-    let tabBar = UITabBar()
+class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private lazy var updateLabel: UILabel = {
         let label = UILabel()
@@ -19,69 +17,62 @@ class MyTabBarController: UIViewController, UITabBarDelegate {
         label.textColor = .darkGray
         return label
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.delegate = self
-        addTabbar()
-        updateUI()
-    }
-
-    func addTabbar() -> Void {
-
-        let item1 = UITabBarItem(title: "Feed", image: nil, tag: 1)
-        let item2 = UITabBarItem(title: "Profile", image: nil, tag: 2)
-
-        tabBar.items = [item1, item2]
-        tabBar.selectedItem = item1
-
-        self.view.addSubview(tabBar)
-        tabBar.addSubview(updateLabel)
-        tabBar.toAutoLayout()
+        delegate = self
         
-        NSLayoutConstraint.activate([
-            
-            tabBar.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tabBar.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            updateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            updateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-        
+        view.addSubview(updateLabel)
+        setupLayout()
         view.backgroundColor = .systemGray5
     }
     
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        switch item.title {
-        case "Feed":
-            navigationController?.pushViewController(FeedViewController(), animated: true)
-        case "Profile":
-            navigationController?.pushViewController(ProfileViewController(), animated: true)
-        default:
-            fatalError("Unknown tab bar item!")
-        }
+    func setupLayout() {
+        NSLayoutConstraint.activate([
+            tabBar.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tabBar.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            updateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            updateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let item1 = FeedViewController()
+        let item2 = ProfileViewController(title: "Profile")
+        let item3 = UINavigationController(rootViewController: ProfileViewController(withCoreData: true, title: "Favorites"))
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue], for: .selected)
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
+
+        let controllers = [item1, item2, item3]
+        self.viewControllers = controllers
+    }
+
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        print("Should select viewController: \(viewController.title ?? "") ?")
+        return true;
+    }
+    
     private var time: Date?
-      
+
     private lazy var dateFormatter: DateFormatter = {
       let formatter = DateFormatter()
       formatter.dateStyle = .short
       formatter.timeStyle = .long
       return formatter
     }()
-    
+
     func fetch(_ completion: () -> Void) {
       time = Date()
       completion()
     }
-    
+
     func updateUI() {
-      guard updateLabel != nil  else {
-        return
-      }
-      
+
       if let time = time {
         updateLabel.text = dateFormatter.string(from: time)
       } else {

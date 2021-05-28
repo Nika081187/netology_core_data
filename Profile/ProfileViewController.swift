@@ -14,6 +14,10 @@ class ProfileViewController: UIViewController {
     let screenRect = UIScreen.main.bounds
     lazy var screenWidth = screenRect.size.width
     lazy var screenHeight = screenRect.size.height
+    var selectedPost: StoragePost?
+    var addedPostTitles = [String]()
+    var favorites: Bool = false
+    var titleText = ""
     
     var tapped = false
     private let table = UITableView(frame: .zero, style: .grouped)
@@ -24,6 +28,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var header = ProfileTableHederView()
     private lazy var photos = ProfilePhotoStackView()
+    private let coreDataManager = CoreDataStack(modelName: "PostModel")
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -34,54 +39,61 @@ class ProfileViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(type(of: self), #function)
+    init(withCoreData: Bool = false, title: String) {
+        super.init(nibName: nil, bundle: nil)
+        titleText = title
+        favorites = withCoreData
+        reloadTable()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print(type(of: self), #function)
+        print("viewDidAppear")
+        reloadTable()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print(type(of: self), #function)
+    func reloadTable() {
+        print("reloadTable")
+        Storage.favoritePosts = self.convertCoreDataPostsToStoragePost(posts: coreDataManager.fetchData(for: Post.self))
+        table.reloadData()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        print(type(of: self), #function)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print(type(of: self), #function)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        print(type(of: self), #function)
+    func convertCoreDataPostsToStoragePost(posts: [Post]) -> [StoragePost] {
+        var favoritePosts = [StoragePost]()
+        for post in posts {
+            let pst = StoragePost(author: post.author!,
+                                  title: post.title!,
+                                  image: UIImage(data: post.image!)!,
+                                  likes: post.likes,
+                                  views: post.views)
+            favoritePosts.append(pst)
+        }
+        return favoritePosts
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        table.toAutoLayout()
-        table.rowHeight = UITableView.automaticDimension
-        table.estimatedRowHeight = 250
-        table.allowsSelection = false
-
-        table.register(PostTableViewCell.self, forCellReuseIdentifier: reuseId)
-        
-        table.dataSource = self
-        table.delegate = self
-        
-        self.navigationController?.navigationBar.isHidden = true
-        table.backgroundColor = .white
+        title = titleText
         view.addSubview(table)
         table.addSubview(avatarButton)
         
+        self.navigationController?.navigationBar.isHidden = true
+        
+        tableSetup()
+        setupLayout()
+        gestureRecognizerSetup()
+    }
+    
+    func tableSetup() {
+        table.toAutoLayout()
+        table.rowHeight = UITableView.automaticDimension
+        table.estimatedRowHeight = 250
+        table.register(PostTableViewCell.self, forCellReuseIdentifier: reuseId)
+        table.dataSource = self
+        table.delegate = self
+        table.backgroundColor = .white
+    }
+    
+    func setupLayout() {
         NSLayoutConstraint.activate([
             table.topAnchor.constraint(equalTo: view.topAnchor),
             table.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -93,10 +105,43 @@ class ProfileViewController: UIViewController {
             avatarButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             avatarButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
-        
-        let tapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapAvatar))
-        header.avatarImage.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func gestureRecognizerSetup() {
+        let tapAvatarGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapAvatar))
+        header.avatarImage.addGestureRecognizer(tapAvatarGestureRecognizer)
         header.avatarImage.isUserInteractionEnabled = true
+        
+        let tapTableGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(tapTable))
+        tapTableGestureRecognizer.numberOfTapsRequired = 2
+        table.addGestureRecognizer(tapTableGestureRecognizer)
+        table.isUserInteractionEnabled = true
+    }
+    
+    @objc func tapTable() {
+        print("Table tapped")
+        
+        guard let post = selectedPost else {
+            print("Нет сохраненного поста")
+            return
+        }
+        if addedPostTitles.contains(post.title) {
+            print("Пост уже сохранен в избранных")
+            return
+        }
+        let pst = self.coreDataManager.createObject(from: Post.self)
+
+        addedPostTitles.append(post.title)
+
+        pst.author = post.author
+        pst.title = post.title
+        pst.image = post.image.pngData()
+        pst.views = post.views
+        pst.likes = post.likes
+
+        let context = self.coreDataManager.getContext()
+        self.coreDataManager.save(context: context)
+        print("Пост \(post.author) добавлен в Избранное")
     }
     
     @objc func tapAvatar() {
@@ -203,16 +248,24 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard section == 0 else {
-            return Storage.posts.count
+            if favorites {
+                return coreDataManager.fetchData(for: Post.self).count
+            } else {
+                return Storage.posts.count
+            }
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as! PostTableViewCell
-        
-        let post = Storage.posts[indexPath.row]
-        cell.configure(post: post)
+        if favorites {
+            let post = coreDataManager.fetchData(for: Post.self)[indexPath.row]
+            cell.configureViaCoreData(post: post)
+        } else {
+            let post = Storage.posts[indexPath.row]
+            cell.configureViaStorage(post: post)
+        }
         return cell
     }
     
@@ -233,5 +286,15 @@ extension ProfileViewController: UITableViewDelegate {
             return photos
         }
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! PostTableViewCell
+        let post = StoragePost(author: cell.nameLabel.text!,
+                               title: cell.descriptionLabel.text!,
+                               image: cell.postImage.image!,
+                               likes: Int64(cell.likesLabel.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())!,
+                               views: Int64(cell.viewsLabel.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())!)
+        selectedPost = post
     }
 }

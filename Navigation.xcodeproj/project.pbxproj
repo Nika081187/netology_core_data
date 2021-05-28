@@ -25,7 +25,7 @@
 		284AE2F125B0C49E00027E09 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B5250CE27700A87020 /* FeedViewController.swift */; };
 		284AE2F225B0C49E00027E09 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD53A257B7AFF005F72DE /* PostTableViewCell.swift */; };
 		284AE2F325B0C49E00027E09 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD537257B7AB1005F72DE /* ProfileTableHederView.swift */; };
-		284AE2F425B0C49E00027E09 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD533257B77BC005F72DE /* Post.swift */; };
+		284AE2F425B0C49E00027E09 /* StoragePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD533257B77BC005F72DE /* StoragePost.swift */; };
 		284AE2F525B0C49E00027E09 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280594F525ACD16A00F5100A /* MyTabBarController.swift */; };
 		284AE2F625B0C49E00027E09 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281F130B258A153E0035822E /* PhotosTableViewCell.swift */; };
 		284AE2F725B0C49E00027E09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B1250CE27700A87020 /* AppDelegate.swift */; };
@@ -44,9 +44,14 @@
 		28810A7225864FBB00F9E84E /* ProfilePhotoStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28810A7125864FBB00F9E84E /* ProfilePhotoStackView.swift */; };
 		28810A752586510200F9E84E /* PhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28810A742586510200F9E84E /* PhotoStorage.swift */; };
 		28810A782586708800F9E84E /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28810A772586708800F9E84E /* PhotosViewController.swift */; };
+		28810E3E265F7DC000399F47 /* PostModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28810E3C265F7DC000399F47 /* PostModel.xcdatamodeld */; };
+		28810E3F265F7DC000399F47 /* PostModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28810E3C265F7DC000399F47 /* PostModel.xcdatamodeld */; };
+		28810E4E265F804E00399F47 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28810E4D265F804E00399F47 /* CoreDataStack.swift */; };
+		28810E65265F8E1E00399F47 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28810E42265F7FBD00399F47 /* Post+CoreDataClass.swift */; };
+		28810E66265F8E2200399F47 /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28810E43265F7FBD00399F47 /* Post+CoreDataProperties.swift */; };
 		288D6C38257292FF0039E5EF /* TopHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288D6C37257292FF0039E5EF /* TopHeaderView.swift */; };
 		288D6C3B257299720039E5EF /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288D6C3A257299720039E5EF /* LogInViewController.swift */; };
-		28CAD534257B77BC005F72DE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD533257B77BC005F72DE /* Post.swift */; };
+		28CAD534257B77BC005F72DE /* StoragePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD533257B77BC005F72DE /* StoragePost.swift */; };
 		28CAD538257B7AB1005F72DE /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD537257B7AB1005F72DE /* ProfileTableHederView.swift */; };
 		28CAD53B257B7AFF005F72DE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD53A257B7AFF005F72DE /* PostTableViewCell.swift */; };
 		28CAD542257BC554005F72DE /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CAD541257BC554005F72DE /* Storage.swift */; };
@@ -73,9 +78,13 @@
 		28810A7125864FBB00F9E84E /* ProfilePhotoStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoStackView.swift; sourceTree = "<group>"; };
 		28810A742586510200F9E84E /* PhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStorage.swift; sourceTree = "<group>"; };
 		28810A772586708800F9E84E /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		28810E3D265F7DC000399F47 /* PostModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PostModel.xcdatamodel; sourceTree = "<group>"; };
+		28810E42265F7FBD00399F47 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
+		28810E43265F7FBD00399F47 /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		28810E4D265F804E00399F47 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		288D6C37257292FF0039E5EF /* TopHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeaderView.swift; sourceTree = "<group>"; };
 		288D6C3A257299720039E5EF /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
-		28CAD533257B77BC005F72DE /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		28CAD533257B77BC005F72DE /* StoragePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragePost.swift; sourceTree = "<group>"; };
 		28CAD537257B7AB1005F72DE /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		28CAD53A257B7AFF005F72DE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		28CAD541257BC554005F72DE /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -136,10 +145,22 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		28810E4A265F7FE300399F47 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				28810E42265F7FBD00399F47 /* Post+CoreDataClass.swift */,
+				28810E43265F7FBD00399F47 /* Post+CoreDataProperties.swift */,
+				28810E3C265F7DC000399F47 /* PostModel.xcdatamodeld */,
+				28810E4D265F804E00399F47 /* CoreDataStack.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
 		28E5B7CB25616863000FE56E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				288D6C37257292FF0039E5EF /* TopHeaderView.swift */,
+				28810E4A265F7FE300399F47 /* CoreDataManager */,
 				28E5B7CF256168A0000FE56E /* ProfileViewController.swift */,
 				28CAD541257BC554005F72DE /* Storage.swift */,
 				28810A742586510200F9E84E /* PhotoStorage.swift */,
@@ -147,7 +168,7 @@
 				281F130B258A153E0035822E /* PhotosTableViewCell.swift */,
 				281F130E258A15940035822E /* PhotosCollectionViewCell.swift */,
 				288D6C3A257299720039E5EF /* LogInViewController.swift */,
-				28CAD533257B77BC005F72DE /* Post.swift */,
+				28CAD533257B77BC005F72DE /* StoragePost.swift */,
 				28CAD537257B7AB1005F72DE /* ProfileTableHederView.swift */,
 				280B8D3B25D59F7500A798FD /* ProfileCoordinator.swift */,
 				28810A7125864FBB00F9E84E /* ProfilePhotoStackView.swift */,
@@ -254,9 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				060782B6250CE27700A87020 /* FeedViewController.swift in Sources */,
+				28810E3E265F7DC000399F47 /* PostModel.xcdatamodeld in Sources */,
 				28CAD53B257B7AFF005F72DE /* PostTableViewCell.swift in Sources */,
 				28CAD538257B7AB1005F72DE /* ProfileTableHederView.swift in Sources */,
-				28CAD534257B77BC005F72DE /* Post.swift in Sources */,
+				28CAD534257B77BC005F72DE /* StoragePost.swift in Sources */,
 				280B8D3725D59F4F00A798FD /* FeedCoordinator.swift in Sources */,
 				280594F625ACD16A00F5100A /* MyTabBarController.swift in Sources */,
 				281F130C258A153E0035822E /* PhotosTableViewCell.swift in Sources */,
@@ -266,8 +288,11 @@
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				28810A752586510200F9E84E /* PhotoStorage.swift in Sources */,
 				28E5B7D0256168A0000FE56E /* ProfileViewController.swift in Sources */,
+				28810E4E265F804E00399F47 /* CoreDataStack.swift in Sources */,
 				28810A782586708800F9E84E /* PhotosViewController.swift in Sources */,
 				28810A7225864FBB00F9E84E /* ProfilePhotoStackView.swift in Sources */,
+				28810E66265F8E2200399F47 /* Post+CoreDataProperties.swift in Sources */,
+				28810E65265F8E1E00399F47 /* Post+CoreDataClass.swift in Sources */,
 				288D6C38257292FF0039E5EF /* TopHeaderView.swift in Sources */,
 				288D6C3B257299720039E5EF /* LogInViewController.swift in Sources */,
 				281F130F258A15940035822E /* PhotosCollectionViewCell.swift in Sources */,
@@ -281,9 +306,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				284AE2F125B0C49E00027E09 /* FeedViewController.swift in Sources */,
+				28810E3F265F7DC000399F47 /* PostModel.xcdatamodeld in Sources */,
 				284AE2F225B0C49E00027E09 /* PostTableViewCell.swift in Sources */,
 				284AE2F325B0C49E00027E09 /* ProfileTableHederView.swift in Sources */,
-				284AE2F425B0C49E00027E09 /* Post.swift in Sources */,
+				284AE2F425B0C49E00027E09 /* StoragePost.swift in Sources */,
 				280B8D3825D59F4F00A798FD /* FeedCoordinator.swift in Sources */,
 				284AE2F525B0C49E00027E09 /* MyTabBarController.swift in Sources */,
 				284AE2F625B0C49E00027E09 /* PhotosTableViewCell.swift in Sources */,
@@ -538,6 +564,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		28810E3C265F7DC000399F47 /* PostModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				28810E3D265F7DC000399F47 /* PostModel.xcdatamodel */,
+			);
+			currentVersion = 28810E3D265F7DC000399F47 /* PostModel.xcdatamodel */;
+			path = PostModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 060782A6250CE27700A87020 /* Project object */;
 }
