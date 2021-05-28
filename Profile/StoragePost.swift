@@ -1,5 +1,5 @@
 //
-//  Post.swift
+//  StoragePost.swift
 //  Navigation
 //
 //  Created by v.milchakova on 05.12.2020.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-struct Post {
+struct StoragePost {
     var author: String
-    var description: String
+    var title: String
     var image: UIImage
-    var likes: Int
-    var views: Int
+    var likes: Int64
+    var views: Int64
 }

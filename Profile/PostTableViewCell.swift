@@ -10,16 +10,24 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     let baseOffset: CGFloat =  16
+//
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        initMultiTap()
+//    }
+//
+//    weak var delegate: TableViewCellDelegate?
+//    weak var multiTapDelegate: MultiTappableDelegate?
     
-    public func configure(post: Post){
+    public func configure(post: StoragePost){
         nameLabel.text = post.author
         postImage.image = post.image
-        descriptionLabel.text = post.description
+        descriptionLabel.text = post.title
         likesLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
     }
 
-    private lazy var nameLabel: UILabel = {
+    public lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.toAutoLayout()
         nameLabel.textColor = .black
@@ -28,7 +36,7 @@ class PostTableViewCell: UITableViewCell {
         return nameLabel
     }()
     
-    private lazy var postImage: UIImageView = {
+    public lazy var postImage: UIImageView = {
         let postImage = UIImageView()
         postImage.toAutoLayout()
         postImage.contentMode = .scaleAspectFit
@@ -36,7 +44,7 @@ class PostTableViewCell: UITableViewCell {
         return postImage
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    public lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.toAutoLayout()
         descriptionLabel.textColor = .gray
@@ -45,7 +53,7 @@ class PostTableViewCell: UITableViewCell {
         return descriptionLabel
     }()
     
-    private lazy var likesLabel: UILabel = {
+    public lazy var likesLabel: UILabel = {
         let likesLabel = UILabel()
         likesLabel.toAutoLayout()
         likesLabel.textColor = .black
@@ -53,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
         return likesLabel
     }()
     
-    private lazy var viewsLabel: UILabel = {
+    public lazy var viewsLabel: UILabel = {
         let viewsLabel = UILabel()
         viewsLabel.toAutoLayout()
         viewsLabel.textColor = .black
@@ -105,3 +113,7 @@ class PostTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraint)
     }
 }
+
+//extension PostTableViewCell: MultiTappableDelegate {
+//    func doubleTapDetected(in view: MultiTappable) { self.delegate?.doubleTapDetected(in: self) }
+//}
