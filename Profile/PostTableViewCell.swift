@@ -10,18 +10,18 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     let baseOffset: CGFloat =  16
-//
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        initMultiTap()
-//    }
-//
-//    weak var delegate: TableViewCellDelegate?
-//    weak var multiTapDelegate: MultiTappableDelegate?
     
-    public func configure(post: StoragePost){
+    public func configureViaStorage(post: StoragePost){
         nameLabel.text = post.author
         postImage.image = post.image
+        descriptionLabel.text = post.title
+        likesLabel.text = "Likes: \(post.likes)"
+        viewsLabel.text = "Views: \(post.views)"
+    }
+    
+    public func configureViaCoreData(post: Post){
+        nameLabel.text = post.author
+        postImage.image = UIImage(data: post.image!) 
         descriptionLabel.text = post.title
         likesLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
@@ -113,7 +113,3 @@ class PostTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraint)
     }
 }
-
-//extension PostTableViewCell: MultiTappableDelegate {
-//    func doubleTapDetected(in view: MultiTappable) { self.delegate?.doubleTapDetected(in: self) }
-//}

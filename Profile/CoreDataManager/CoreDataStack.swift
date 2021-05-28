@@ -56,7 +56,9 @@ final class CoreDataStack {
     
     func fetchData<T: NSManagedObject>(for entity: T.Type) -> [T] {
         let context = getContext()
-        let request = entity.fetchRequest() as! NSFetchRequest<T>
+        let entityName = String(describing: T.self)
+        let request = NSFetchRequest<T>(entityName: entityName)
+        
         do {
             return try context.fetch(request)
         } catch {

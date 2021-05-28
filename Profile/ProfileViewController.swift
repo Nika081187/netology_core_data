@@ -28,9 +28,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var header = ProfileTableHederView()
     private lazy var photos = ProfilePhotoStackView()
-    
     private let coreDataManager = CoreDataStack(modelName: "PostModel")
-    var counter: Int = 0
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -45,6 +43,16 @@ class ProfileViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         titleText = title
         favorites = withCoreData
+        reloadTable()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("viewDidAppear")
+        reloadTable()
+    }
+    
+    func reloadTable() {
+        print("reloadTable")
         Storage.favoritePosts = self.convertCoreDataPostsToStoragePost(posts: coreDataManager.fetchData(for: Post.self))
         table.reloadData()
     }
@@ -64,10 +72,11 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = titleText
         view.addSubview(table)
         table.addSubview(avatarButton)
+        
+        self.navigationController?.navigationBar.isHidden = true
         
         tableSetup()
         setupLayout()
@@ -240,7 +249,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard section == 0 else {
             if favorites {
-                return Storage.favoritePosts.count
+                return coreDataManager.fetchData(for: Post.self).count
             } else {
                 return Storage.posts.count
             }
@@ -251,11 +260,11 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as! PostTableViewCell
         if favorites {
-            let post = Storage.favoritePosts[indexPath.row]
-            cell.configure(post: post)
+            let post = coreDataManager.fetchData(for: Post.self)[indexPath.row]
+            cell.configureViaCoreData(post: post)
         } else {
             let post = Storage.posts[indexPath.row]
-            cell.configure(post: post)
+            cell.configureViaStorage(post: post)
         }
         return cell
     }

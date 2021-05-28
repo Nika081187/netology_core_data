@@ -25,7 +25,6 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         view.addSubview(updateLabel)
         setupLayout()
         view.backgroundColor = .systemGray5
-        
     }
     
     func setupLayout() {
@@ -43,10 +42,12 @@ class MyTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewWillAppear(animated)
         let item1 = FeedViewController()
         let item2 = ProfileViewController(title: "Profile")
-        let item3 = ProfileViewController(withCoreData: true, title: "Favorites")
+        let item3 = UINavigationController(rootViewController: ProfileViewController(withCoreData: true, title: "Favorites"))
         
-        let icon1 = UITabBarItem(title: "Title", image: UIImage(named: "someImage.png"), selectedImage: UIImage(named: "otherImage.png"))
-        item1.tabBarItem = icon1
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemBlue], for: .selected)
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.darkGray], for: .normal)
+
         let controllers = [item1, item2, item3]
         self.viewControllers = controllers
     }
